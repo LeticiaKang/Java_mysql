@@ -3,11 +3,11 @@ public class TermProjectDemo {
         System.out.println("선택");
 
         TermProjectPolls polls = new TermProjectPolls();
-        TermProjectStatics statics = new TermProjectStatics();
-
         int val = polls.PollFunction();
-        int val2 = statics.StaticsFunction();
-
+        
+        TermProjectStatics statics = new TermProjectStatics();
+        val = statics.StaticsFunction();
+        
         return;
     }
 }
