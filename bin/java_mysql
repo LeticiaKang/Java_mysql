@@ -1,0 +1,42 @@
+// 1. VS code에서 폴더 만들기, class 파일 만들기
+// 2. MySQL들어가기 → mysql - connector J
+// 자바 프로제트 파일 내 연동시키는 파일을 만들어준 것과 같음
+
+// 3. Database에 Connect to database 클릭
+
+
+// 4. Connection Method, hostname(localhost), port(3306), Default  Schema, username(root), pw 입력
+
+   static final String USER = "root";
+   static final String PASS = "tbrs00002b";
+   static final String DB_URL = "jdbc:mysql://localhost/world";
+//static final String DB_URL = "jdbc:mysql://hostname이름:포트번호/ DefaultSchema명";
+   String Query = "select Name, IndepYear, Region, Capital " +
+                  "from country " +
+                  "where 1 =1 " +
+                  "and Name like '%an%'";
+//jdbc을 mysql로 한다. 오라클이면 jdbc:오라클 이렇게 적으면 됨.
+
+Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//5-1. connection되었다는 것은 database가 연결되었다는 것, 그 connection을 계속 가지고 가겠다.
+Statement stmt = conn.createStatement();
+// conn을 이용해서 계속 가지고 감.statement화면을 뜻함. import java.sql 
+// Connection,DriverManager QuickFix를 이용해서 import해주기 
+// try.catch문 QuickFix를 통해 자동으로 래핑시키기
+
+
+// 5. 새로운 query문 생성. Select*From (원하는 테이블명)으로 테이블 전체 출력
+// QUERY를 던질 때 사용하는 메소드 명은 executeQuery. * 쿼리문 동작 확인후 넣기 * 쿼리문 끝이 스페이스 꼭 넣기
+// 5-2. ResultSet은 결과값이 담기는 집합. 
+ResultSet rs = stmt.executeQuery(QUERY);
+
+// 6. result grid, action output 확인
+while (rs.next()){
+   // Retrieve by column name
+   System.out.print("Name: " + rs.getString("columnLabel : Name"));
+   System.out.print(", IndepYear: " + rs.getInt("columnLabel : IndepYear"));
+   System.out.print(", Region: " + rs.getString("columnLabel : Region"));
+   System.out.print(", Capital: " + rs.getInt("columnLabel : Capital"));
+}
+
+// 7. f5(run에 debug모드 실행, breakpoint같이)
